@@ -1,0 +1,27 @@
+#Noah ABrigo
+#Dr. Halil Bisgin
+#CSC 302
+#Homework 6
+#Due April 6, 2022
+
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+
+load("C:/Users/Noah/My Drive/2021-2022/Winter 2022/Data Visualization CSC302/Homework/HW6/house_prices.rda")
+house_prices 
+ggplot(house_prices, aes(date, house_price_index)) +
+  geom_line() +
+  facet_wrap(vars(state)) +
+  scale_x_continuous(limits = c(as.Date("1980-1-1"), as.Date("2020-1-1")), breaks = c(as.Date("1980-1-1"),as.Date("2000-1-1"),as.Date("2020-1-1")), labels = c("80","00","20") )
+
+house_reshaped = gather(house_prices,measure,value,-date,-state,-house_price_perc)
+ggplot(house_reshaped, aes(date, value)) +
+  geom_path() +
+  facet_wrap(vars(state)) +
+  scale_x_continuous(limits = c(as.Date("1980-1-1"), as.Date("2020-1-1")), breaks = c(as.Date("1980-1-1"),as.Date("2000-1-1"),as.Date("2020-1-1")), labels = c("80","00","20") )
+
+#I think this data is a good indicator of the housing market. Low unemployment percent means more people are working
+#and are able to afford a house making the cost of houses rise. While higher undemployment percent means less people are
+# working and are not able to afford a house, making the costs of housing lower.
